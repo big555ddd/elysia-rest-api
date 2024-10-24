@@ -1,6 +1,6 @@
 import { Elysia } from 'elysia';
 import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from './user.services';
-import { CheckAuthorization } from '../../../helpers/objectHelpers';
+import { CheckAuthorization } from '../../middleware/middleware';
 import type { CreateUserDTO, UpdateUserDTO } from './user.dto';
 import { Success, BadRequest } from '../../base/response';
 import setupLogger from '../../../internal/utils/logger'; // นำเข้า logger
