@@ -15,9 +15,11 @@ const userController = new Elysia()
         form = 0,
         size = 10,
         search = '',
+        searchby = 'first_name',
+        role_id = 0,
       } = query as Params;
     
-      const users = await getAllUsers(form, size, search);
+      const users = await getAllUsers(form, size, search, searchby, role_id);
       console.log("users", users);
       return Paginate(users.data, users.skip,users.take,users.count);
     } catch (err) {

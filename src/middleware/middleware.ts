@@ -26,12 +26,7 @@ const token = headersObject.authorization!.split(' ')[1];
 const decodedToken = verifyToken(token);
 if (!decodedToken) {
   return BadRequest('Invalid token', null);
-} else if (typeof decodedToken !== 'string' && 'id' in decodedToken) {
-  console.log('decodedToken id:', decodedToken.id);
-} else {
-  return BadRequest('Invalid token payload', null);
-}
-
+} 
 
   return headersObject;
 }

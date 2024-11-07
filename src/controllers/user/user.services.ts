@@ -7,21 +7,23 @@ import { omitFields } from '../../../helpers/objectHelpers'; // นำเข้�
 
 
 // ดึงผู้ใช้ทั้งหมด โดยไม่ดึงข้อมูลที่ถูก soft delete (deleted_at != null)
-export const getAllUsers = async (form: number, size: number, search: string) => {
+export const getAllUsers = async (form: number, size: number, search: string, searchby: string, role_id: number) => {
   const skip = parseInt(form.toString(), 10);
   const take = parseInt(size.toString(), 10);
+  const roleId = parseInt(role_id.toString(), 10);  
 
+  // สร้าง whereClause แบบ dynamic ตามเงื่อนไขที่กำหนด
   const whereClause: any = {
     deleted_at: null,
     ...(search && {
-      first_name: {
+      [searchby]: {
         contains: search,
         mode: 'insensitive',
       },
     }),
+    ...(roleId !== 0 && { role_id: roleId }), // เพิ่มเงื่อนไข role_id เมื่อ roleId ไม่เท่ากับ 0
   };
 
-  // Fetch users with conditions, pagination, and include role name
   const users = await prisma.user.findMany({
     where: whereClause,
     skip: skip,
@@ -35,19 +37,14 @@ export const getAllUsers = async (form: number, size: number, search: string) =>
     },
   });
 
-  // Count total users matching the conditions
   const count = await prisma.user.count({
     where: whereClause,
   });
 
-  // Omit sensitive fields before returning
   const data = users.map(user => omitFields(user, ['password', 'deleted_at']));
   return { data, count, skip, take };
 };
 
-
-
-// ดึงผู้ใช้ตาม ID โดยไม่ดึงข้อมูลที่ถูก soft delete (deleted_at != null)
 export const getUserById = async (id: number) => {
   const user = await prisma.user.findFirst({
     where: {
