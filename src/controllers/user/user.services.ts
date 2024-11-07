@@ -8,6 +8,9 @@ import { omitFields } from '../../../helpers/objectHelpers'; // นำเข้�
 
 // ดึงผู้ใช้ทั้งหมด โดยไม่ดึงข้อมูลที่ถูก soft delete (deleted_at != null)
 export const getAllUsers = async (form: number, size: number, search: string) => {
+  const skip = parseInt(form.toString(), 10);
+  const take = parseInt(size.toString(), 10);
+
   const whereClause: any = {
     deleted_at: null,
     ...(search && {
@@ -18,11 +21,18 @@ export const getAllUsers = async (form: number, size: number, search: string) =>
     }),
   };
 
-  // Fetch users with conditions and pagination
+  // Fetch users with conditions, pagination, and include role name
   const users = await prisma.user.findMany({
     where: whereClause,
-    skip: form,
-    take: size,
+    skip: skip,
+    take: take,
+    include: {
+      role: {
+        select: {
+          name: true,
+        },
+      },
+    },
   });
 
   // Count total users matching the conditions
@@ -31,9 +41,10 @@ export const getAllUsers = async (form: number, size: number, search: string) =>
   });
 
   // Omit sensitive fields before returning
-  const data = omitFields(users, ['password', 'deleted_at']);
-  return { data, count };
+  const data = users.map(user => omitFields(user, ['password', 'deleted_at']));
+  return { data, count, skip, take };
 };
+
 
 
 // ดึงผู้ใช้ตาม ID โดยไม่ดึงข้อมูลที่ถูก soft delete (deleted_at != null)
@@ -48,7 +59,7 @@ export const getUserById = async (id: number) => {
 };
 
 // สร้างผู้ใช้ใหม่
-export const createUser = async (data: CreateUserDTO) => {
+export const  createUser = async (data: CreateUserDTO) => {
   const now = Math.floor(Date.now() / 1000); // Unix timestamp
   
   // Hash password โดยใช้ฟังก์ชันที่นำเข้ามา

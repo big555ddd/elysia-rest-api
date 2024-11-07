@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from './user.services';
 import { CheckAuthorization } from '../../middleware/middleware';
-import type { CreateUserDTO, UpdateUserDTO } from './user.dto';
+import type { CreateUserDTO, Params, UpdateUserDTO } from './user.dto';
 import { Success, BadRequest, Paginate } from '../../base/response';
 import setupLogger from '../../../internal/utils/logger'; // นำเข้า logger
 
@@ -11,13 +11,15 @@ const userController = new Elysia()
   .get('list', async ({ query }) => {
     try {
       // รับform กับsize จาก query string
-      const form = query.form ? Number(query.form) : 0;
-      const size = query.size ? Number(query.size) : 10;
-      const search = query.search ? String(query.search) : "";
+      const {
+        form = 0,
+        size = 10,
+        search = '',
+      } = query as Params;
     
       const users = await getAllUsers(form, size, search);
       console.log("users", users);
-      return Paginate(users.data, 0,10,users.count);
+      return Paginate(users.data, users.skip,users.take,users.count);
     } catch (err) {
       logger.error('Error fetching users:', err);
       return BadRequest((err as Error).message, null);

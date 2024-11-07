@@ -13,8 +13,40 @@ model user {
   password   String
   first_name String
   last_name  String
-  created_at BigInt   @default(0) // Unix timestamp
-  updated_at BigInt   @default(0) // Unix timestamp
-  deleted_at BigInt?               // Optional Unix timestamp for soft delete
+  role_id    Int
+  created_at BigInt   @default(0)
+  updated_at BigInt   @default(0)
+  deleted_at BigInt?          
+
+  role       role     @relation(fields: [role_id], references: [id])
 }
 
+model role {
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  created_at BigInt   @default(0)
+  updated_at BigInt   @default(0)
+  deleted_at BigInt?               
+
+  users      user[]  
+  permissions role_permission[] @relation("RoleToPermissions")
+}
+
+model permission {
+  id          Int      @id
+  name        String   @unique
+  description String 
+  is_actived  Boolean
+
+  roles      role_permission[] @relation("PermissionToRoles")
+}
+
+model role_permission {
+  role_id       Int
+  permission_id Int
+
+  role         role       @relation(fields: [role_id], references: [id], onDelete: Cascade, name: "RoleToPermissions")
+  permission   permission @relation(fields: [permission_id], references: [id], onDelete: Cascade, name: "PermissionToRoles")
+
+  @@id([role_id, permission_id])
+}
