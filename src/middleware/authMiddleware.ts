@@ -2,14 +2,11 @@
 import { CheckAuthorization } from './middleware';
 import setupLogger from '../../internal/utils/logger';
 import { BadRequest } from '../base/response';
-import type { Context } from 'elysia'; // ใช้ Context เท่านั้น
+import type { Context } from 'elysia';
 
 const logger = setupLogger();
 
-// กำหนดประเภทของฟังก์ชัน next เป็น () => Promise<any> แทน
-export const authMiddleware = (
-  handler: (context: Context & { auth?: any }, next: () => Promise<any>) => Promise<any>
-) => async (context: Context & { auth?: any }, next: () => Promise<any>) => {
+export const authMiddleware = async (context: Context) => {
   const headersObject = CheckAuthorization(context.headers);
 
   if (headersObject.code === 400) {
@@ -18,7 +15,5 @@ export const authMiddleware = (
   }
 
   // Set headersObject in context for future use
-  context.auth = headersObject;
-
-  return await handler(context, next);
+  (context as any).auth = headersObject; // ใช้ `as any` เพื่อเพิ่ม auth ใน context
 };

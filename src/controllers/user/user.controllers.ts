@@ -8,16 +8,8 @@ import setupLogger from '../../../internal/utils/logger'; // นำเข้า 
 const logger = setupLogger(); // สร้าง logger
 
 const userController = new Elysia()
-  .get('list', async ({ headers, query }) => {
+  .get('list', async ({ query }) => {
     try {
-      // ใช้ฟังก์ชัน Helper สำหรับแปลง headers และตรวจสอบ Authorization
-      const headersObject = CheckAuthorization(headers);      
-
-      // ตรวจสอบว่า headersObject เป็น BadRequest หรือไม่
-      if (headersObject.code === 400) {
-        logger.error('Invalid token');
-        return headersObject;
-      }
       // รับform กับsize จาก query string
       const form = query.form ? Number(query.form) : 0;
       const size = query.size ? Number(query.size) : 10;
@@ -31,18 +23,9 @@ const userController = new Elysia()
       return BadRequest((err as Error).message, null);
     }
   })
-  .get(':id', async ({ params, headers }) => {
+  .get(':id', async ({ params }) => {
     try {
       logger.info(`Fetching user by ID: ${params.id}`);
-
-      // ใช้ฟังก์ชัน Helper สำหรับแปลง headers และตรวจสอบ Authorization
-      const headersObject = CheckAuthorization(headers);
-
-      // ตรวจสอบว่า headersObject เป็น BadRequest หรือไม่
-      if (headersObject.code === 400) {
-        return headersObject;
-      }
-
       const user = await getUserById(Number(params.id));
       if (!user) {
         logger.warn(`User not found with ID: ${params.id}`);
@@ -55,16 +38,8 @@ const userController = new Elysia()
       return BadRequest((err as Error).message, null);
     }
   })
-  .post('create', async ({ body, headers }) => {
+  .post('create', async ({ body}) => {
     try {
-      // ใช้ฟังก์ชัน Helper สำหรับแปลง headers และตรวจสอบ Authorization
-      const headersObject = CheckAuthorization(headers);
-
-      // ตรวจสอบว่า headersObject เป็น BadRequest หรือไม่
-      if (headersObject.code === 400) {
-        return headersObject;
-      }
-
       const data = body as CreateUserDTO;
       const newUser = await createUser(data);
       console.log('New user created:', newUser);
@@ -76,14 +51,6 @@ const userController = new Elysia()
   })
   .patch(':id', async ({ params, body, headers }) => {
     try {
-      // ใช้ฟังก์ชัน Helper สำหรับแปลง headers และตรวจสอบ Authorization
-      const headersObject = CheckAuthorization(headers);
-
-      // ตรวจสอบว่า headersObject เป็น BadRequest หรือไม่
-      if (headersObject.code === 400) {
-        return headersObject;
-      }
-
       const data = body as UpdateUserDTO;
       const updatedUser = await updateUser(Number(params.id), data);
       console.log('User updated:', updatedUser);
@@ -95,14 +62,6 @@ const userController = new Elysia()
   })
   .delete(':id', async ({ params, headers }) => {
     try {
-      // ใช้ฟังก์ชัน Helper สำหรับแปลง headers และตรวจสอบ Authorization
-      const headersObject = CheckAuthorization(headers);
-
-      // ตรวจสอบว่า headersObject เป็น BadRequest หรือไม่
-      if (headersObject.code === 400) {
-        return headersObject;
-      }
-
       const deletedUser = await deleteUser(Number(params.id));
       console.log('User deleted:', deletedUser);
       return Success(deletedUser);
