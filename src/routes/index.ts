@@ -7,6 +7,8 @@ const routes = new Elysia();
 // Apply CORS middleware globally
 routes.use(corsMiddleware);
 
+
+
 routes.get('/', () => 'Hello World!');
 routes.get('/healthz', () => 'Healthy'); 
 

@@ -2,27 +2,30 @@ import { Elysia } from 'elysia';
 import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from './user.services';
 import { CheckAuthorization } from '../../middleware/middleware';
 import type { CreateUserDTO, UpdateUserDTO } from './user.dto';
-import { Success, BadRequest } from '../../base/response';
+import { Success, BadRequest, Paginate } from '../../base/response';
 import setupLogger from '../../../internal/utils/logger'; // นำเข้า logger
 
 const logger = setupLogger(); // สร้าง logger
 
 const userController = new Elysia()
-  .get('list', async ({ headers }) => {
+  .get('list', async ({ headers, query }) => {
     try {
       // ใช้ฟังก์ชัน Helper สำหรับแปลง headers และตรวจสอบ Authorization
-      const headersObject = CheckAuthorization(headers);
+      const headersObject = CheckAuthorization(headers);      
 
       // ตรวจสอบว่า headersObject เป็น BadRequest หรือไม่
       if (headersObject.code === 400) {
         logger.error('Invalid token');
         return headersObject;
       }
-
-      logger.info('Fetching all users...');
-      const users = await getAllUsers();
+      // รับform กับsize จาก query string
+      const form = query.form ? Number(query.form) : 0;
+      const size = query.size ? Number(query.size) : 10;
+      const search = query.search ? String(query.search) : "";
+    
+      const users = await getAllUsers(form, size, search);
       console.log("users", users);
-      return Success(users);
+      return Paginate(users.data, 0,10,users.count);
     } catch (err) {
       logger.error('Error fetching users:', err);
       return BadRequest((err as Error).message, null);

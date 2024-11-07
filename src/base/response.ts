@@ -1,7 +1,7 @@
 import { stringifyWithBigInt } from '../../helpers/objectHelpers.ts'; 
 
 export interface ResponsePaginate {
-    page: number;
+    form: number;
     size: number;
     total: number;
 }
@@ -37,8 +37,16 @@ export const Success = <T>(data: T, paginate?: ResponsePaginate) => {
 };
 
 // Paginate 200 success (supports pagination)
-export const Paginate = <T>(data: T, paginate: ResponsePaginate) => {
-    return defaultJSON(200, 'Success', data, paginate);
+export const Paginate = <T>(data: T, form: number, size: number, total: number) => {
+    if (total === 0) {
+        return defaultJSON(200, 'Success', [], undefined);
+    } else {
+        return defaultJSON(200, 'Success', data, {
+            form: form,
+            size: size,
+            total: total,
+        });
+    }
 };
 
 // BadRequest 400 other and external error

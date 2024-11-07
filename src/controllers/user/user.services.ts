@@ -3,15 +3,38 @@ import type { CreateUserDTO, UpdateUserDTO } from './user.dto';
 import { hashPassword } from '../../../internal/utils/hashing'; // นำเข้าฟังก์ชัน hashing
 import { omitFields } from '../../../helpers/objectHelpers'; // นำเข้า helper function
 
+
+
+
 // ดึงผู้ใช้ทั้งหมด โดยไม่ดึงข้อมูลที่ถูก soft delete (deleted_at != null)
-export const getAllUsers = async () => {
+export const getAllUsers = async (form: number, size: number, search: string) => {
+  const whereClause: any = {
+    deleted_at: null,
+    ...(search && {
+      first_name: {
+        contains: search,
+        mode: 'insensitive',
+      },
+    }),
+  };
+
+  // Fetch users with conditions and pagination
   const users = await prisma.user.findMany({
-    where: {
-      deleted_at: null, 
-    },
+    where: whereClause,
+    skip: form,
+    take: size,
   });
-  return omitFields(users, ['password', 'deleted_at']); // ลบฟิลด์ password และ deleted_at
+
+  // Count total users matching the conditions
+  const count = await prisma.user.count({
+    where: whereClause,
+  });
+
+  // Omit sensitive fields before returning
+  const data = omitFields(users, ['password', 'deleted_at']);
+  return { data, count };
 };
+
 
 // ดึงผู้ใช้ตาม ID โดยไม่ดึงข้อมูลที่ถูก soft delete (deleted_at != null)
 export const getUserById = async (id: number) => {
