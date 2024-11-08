@@ -11,6 +11,9 @@ export const getAllRoles = async (form: number, size: number, search: string) =>
   const skip = parseInt(form.toString(), 10);
   const take = parseInt(size.toString(), 10);
 
+  console.log("skip", skip);
+  
+
   const whereClause: any = {
     deleted_at: null,
     ...(search && {

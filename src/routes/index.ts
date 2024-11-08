@@ -1,12 +1,13 @@
-import { Elysia } from 'elysia';
-import userController from '../controllers/user/user.controllers';
+// main.routes.ts
+import { Elysia, type Context } from 'elysia';
 import authController from '../controllers/auth/auth.controllers';
 import { corsMiddleware } from '../middleware/middleware';
-import { authMiddleware } from '../middleware/authMiddleware';
-import roleController from '../controllers/role/role.controllers';
-import permissionController from '../controllers/permission/permission.controllers';
+import role from './role';
+import user from './user';
+import permission from './permission';
 
 const routes = new Elysia();
+const app = new Elysia();
 
 // Apply CORS middleware globally
 routes.use(corsMiddleware);
@@ -21,23 +22,9 @@ routes.group('/auth', (app) => {
   return app;
 });
 
-// User routes with authentication middleware
-routes.group('/users', (app) => {
-  app.onBeforeHandle(authMiddleware);
-  app.use(userController);
-  return app;
-});
 
-routes.group('/role', (app) => {
-  app.onBeforeHandle(authMiddleware);
-  app.use(roleController);
-  return app;
-});
-
-routes.group('/permission', (app) => {
-  app.onBeforeHandle(authMiddleware);
-  app.use(permissionController);
-  return app;
-});
+routes.use(user);
+routes.use(role);
+routes.use(permission)
 
 export default routes;
