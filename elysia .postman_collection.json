@@ -1,0 +1,1072 @@
+{
+	"info": {
+		"_postman_id": "3bb703d6-a58e-42eb-9411-9c5428374c59",
+		"name": "elysia ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38714628"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Get By ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "dassa",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"big555ddd2\",\n    \"password\" : \"123456\",\n    \"first_name\" : \"big\",\n    \"last_name\" : \"kub\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"big555ddd2\",\n    \"password\" : \"123456\",\n    \"first_name\" : \"big\",\n    \"last_name\" : \"kub\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"big555ddd2\",\n    \"password\": \"123456\",\n    \"first_name\": \"big\",\n    \"last_name\": \"kub\",\n    \"created_at\": \"1729145192\",\n    \"updated_at\": \"1729145192\",\n    \"deleted_at\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/list?form=0&size=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"list"
+							],
+							"query": [
+								{
+									"key": "form",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "search",
+									"value": "big",
+									"disabled": true
+								},
+								{
+									"key": "searchby",
+									"value": "first_name",
+									"disabled": true
+								},
+								{
+									"key": "role_id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"big555ddd2\",\n    \"password\" : \"123456\",\n    \"first_name\" : \"big\",\n    \"last_name\" : \"kub\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"username\": \"big555ddd2\",\n        \"password\": \"1234567\",\n        \"first_name\": \"big\",\n        \"last_name\": \"kub\",\n        \"created_at\": \"1729145192\",\n        \"updated_at\": \"1729162305\",\n        \"deleted_at\": null\n    },\n    {\n        \"id\": 2,\n        \"username\": \"big555ddd3\",\n        \"password\": \"123456\",\n        \"first_name\": \"big\",\n        \"last_name\": \"kub\",\n        \"created_at\": \"1729162353\",\n        \"updated_at\": \"1729162424\",\n        \"deleted_at\": null\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"big555ddd2\",\n    \"password\" : \"1234567\",\n    \"first_name\" : \"big\",\n    \"last_name\" : \"kub\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"big555ddd2\",\n    \"password\" : \"1234567\",\n    \"first_name\" : \"big\",\n    \"last_name\" : \"kub\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Oct 2024 10:51:45 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"big555ddd2\",\n    \"password\": \"1234567\",\n    \"first_name\": \"big\",\n    \"last_name\": \"kub\",\n    \"created_at\": \"1729145192\",\n    \"updated_at\": \"1729162305\",\n    \"deleted_at\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"big555ddd2\",\n    \"password\" : \"1234567\",\n    \"first_name\" : \"big\",\n    \"last_name\" : \"kub\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Oct 2024 10:51:45 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"big555ddd2\",\n    \"password\": \"1234567\",\n    \"first_name\": \"big\",\n    \"last_name\": \"kub\",\n    \"created_at\": \"1729145192\",\n    \"updated_at\": \"1729162305\",\n    \"deleted_at\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"big555ddd\",\n    \"password\": \"123456\",\n    \"role_id\": 2,\n    \"first_name\": \"big\",\n    \"last_name\": \"kub\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"big555ddd3\",\n    \"password\" : \"123456\",\n    \"first_name\" : \"big\",\n    \"last_name\" : \"kub\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Oct 2024 10:52:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"username\": \"big555ddd3\",\n    \"password\": \"123456\",\n    \"first_name\": \"big\",\n    \"last_name\": \"kub\",\n    \"created_at\": \"1729162353\",\n    \"updated_at\": \"1729162353\",\n    \"deleted_at\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"big555ddd\",\n    \"password\" : \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"big555ddd\",\n    \"password\" : \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Oct 2024 13:22:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "222"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"200\",\n    \"message\": \"Success\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJiaWc1NTVkZGQiLCJpYXQiOjE3MjkxNzEzNDYsImV4cCI6MTcyOTI1Nzc0Nn0.CeM-_0ucds8xc013fd9RadoV_VTYKfaREsr1f8mZk5Y\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/role/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/role/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"role",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2024 06:57:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "115"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"admin\",\n        \"created_at\": \"1730962657\",\n        \"updated_at\": \"1730962657\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/role/list?form=0&size=10&search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								"list"
+							],
+							"query": [
+								{
+									"key": "form",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/role/list?form=0&size=10&search",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"role",
+										"list"
+									],
+									"query": [
+										{
+											"key": "form",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "search",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2024 07:02:28 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "233"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"user\",\n            \"created_at\": \"1730962650\",\n            \"updated_at\": \"1730962650\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"admin\",\n            \"created_at\": \"1730962657\",\n            \"updated_at\": \"1730962657\"\n        }\n    ],\n    \"paginate\": {\n        \"form\": 0,\n        \"size\": 2,\n        \"total\": 2\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/role/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/role/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"role",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2024 07:06:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"user\",\n        \"created_at\": \"1730962650\",\n        \"updated_at\": \"1730962650\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/role/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"admin2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/role/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"role",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2024 07:07:10 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "116"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"admin2\",\n        \"created_at\": \"1730962650\",\n        \"updated_at\": \"1730963230\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/role/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"role",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "permission",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/permission/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"permission",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/permission/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"permission",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2024 07:51:19 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "309"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Success\",\n    \"data\": [\n        [\n            {\n                \"id\": 1,\n                \"name\": \"Create\",\n                \"description\": \"Create\",\n                \"is_actived\": true\n            }\n        ],\n        [\n            {\n                \"id\": 2,\n                \"name\": \"Read\",\n                \"description\": \"Read\",\n                \"is_actived\": true\n            }\n        ],\n        [\n            {\n                \"id\": 3,\n                \"name\": \"Update\",\n                \"description\": \"Update\",\n                \"is_actived\": true\n            }\n        ],\n        [\n            {\n                \"id\": 4,\n                \"name\": \"Delete\",\n                \"description\": \"Delete\",\n                \"is_actived\": true\n            }\n        ]\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/permission/list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"permission",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/permission/list",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"permission",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2024 08:21:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "301"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Create\",\n            \"description\": \"Create\",\n            \"is_actived\": true\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Read\",\n            \"description\": \"Read\",\n            \"is_actived\": true\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Update\",\n            \"description\": \"Update\",\n            \"is_actived\": true\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Delete\",\n            \"description\": \"Delete\",\n            \"is_actived\": true\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Set",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role_id\": 1,\n    \"permission_id\": [\n        1,\n        2,\n        3,\n        4\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/permission/set",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"permission",
+								"set"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": 1,\n    \"permission_id\": [\n        1,\n        2,\n        3,\n        4\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/permission/set",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"permission",
+										"set"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2024 08:09:21 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "169"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"message\": \"Success\",\n    \"data\": [\n        {\n            \"role_id\": 1,\n            \"permission_id\": 1\n        },\n        {\n            \"role_id\": 1,\n            \"permission_id\": 2\n        },\n        {\n            \"role_id\": 1,\n            \"permission_id\": 3\n        },\n        {\n            \"role_id\": 1,\n            \"permission_id\": 4\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJiaWc1NTVkZGQiLCJpYXQiOjE3MzEwMzU0NjUsImV4cCI6MTczMTEyMTg2NX0.61QdyHeLoh5j641JGWwsX9UFpkDrqIIRbEsrOfsROOw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
