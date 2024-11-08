@@ -1,6 +1,5 @@
 import { type Context } from 'elysia';
 import { getAllPermissions, createPermission,setPermission} from './permission.services';
-import { CheckAuthorization } from '../../middleware/middleware';
 import type {SetPermissionDTO } from './permission.dto';
 import { Success, BadRequest } from '../../base/response';
 import setupLogger from '../../../internal/utils/logger'; // นำเข้า logger
