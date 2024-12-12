@@ -3,6 +3,7 @@ import prisma from '../../database/database';
 import setupLogger from '../../internal/utils/logger';
 import routes from '../../src/routes';
 import { Elysia } from 'elysia';
+import { corsMiddleware } from '../middleware/middleware';
 
 // Load environment variables
 dotenv.config();
@@ -37,8 +38,10 @@ export const initModules = async (app: Elysia) => {
     logger.error('❌ Database connection failed:', error);
     process.exit(1);
   }
+  app.use(corsMiddleware);
 
   app.use(routes); // Use all defined routes
+
 
   logger.info('All modules initialized');
 };
