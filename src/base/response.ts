@@ -50,11 +50,8 @@ export const Success = <T>(data: T, paginate?: ResponsePaginate) => {
 // Paginate 200 success (supports pagination)
 export const Paginate = <T>(data: T, form: number, size: number, total: number) => {
     if (total === 0) {
-        console.log("1")
         return defaultJSON(200, 'Success', [], undefined);
     } else {
-        console.log("2")
-
         return defaultJSON(200, 'Success', data, {
             form: form,
             size: size,
