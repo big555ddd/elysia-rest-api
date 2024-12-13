@@ -7,18 +7,18 @@ export interface ResponsePaginate {
 }
 
 export interface BaseResponse<T> {
-    code: number;
+    status: number;
     message: string;
     data?: T | { success: true; paginate?: ResponsePaginate }; // Make data optional and allow success object
     paginate?: ResponsePaginate;
 }
 
 // Function for creating response JSON
-export const defaultJSON = <T>(code: number, message: string, data?: T, paginate?: ResponsePaginate) => {
+export const defaultJSON = <T>(status: number, message: string, data?: T, paginate?: ResponsePaginate) => {
     const response: BaseResponse<T> = {
-        code, // Store the code as a number directly
+        status, // Store the status as a number directly
         message,
-        data: code === 200 ? { success: true, paginate } : undefined, // Only show success and paginate if the code is 200
+        data: status === 200 ? { success: true, paginate } : undefined, // Only show success and paginate if the status is 200
         paginate,
     };
 
@@ -28,7 +28,18 @@ export const defaultJSON = <T>(code: number, message: string, data?: T, paginate
         response.data = JSON.parse(stringifyWithBigInt(data)); // Handle BigInt
     }
 
-    return response;
+    // If data is provided, stringify it
+    if (status !== 200) {
+        response.message = message;
+        response.data = JSON.parse(stringifyWithBigInt(data)); // Handle BigInt
+    }
+
+    // Return a Response object with the proper HTTP status status
+    return new Response(JSON.stringify(response), {
+        status: status, // Use the `status` parameter as the HTTP status status
+        headers: { 'Content-Type': 'application/json' },
+    });
+
 };
 
 // Success 200 success
