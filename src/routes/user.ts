@@ -10,8 +10,8 @@ user.group('/users', (app) => {
     app.onBeforeHandle(authMiddleware);
     
     app.get('/list', async (context) => {
-        const hasPermission = await permissionMiddleware(context as any, 2);
-        if (!hasPermission) return Unauthorized('Permission denied', null);
+        // const hasPermission = await permissionMiddleware(context as any, 2);
+        // if (!hasPermission) return Unauthorized('Permission denied', null);
         return await ListUsers(context as Context);
     });
     

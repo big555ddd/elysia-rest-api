@@ -9,7 +9,7 @@ const logger = setupLogger();
 export const authMiddleware = async (context: Context) => {
   const headersObject = CheckAuthorization(context.headers);
 
-  if ((await headersObject).code === 400) {
+  if ((await headersObject).status === 400) {
     logger.error('Invalid token');
     return BadRequest('Invalid token', null); // ส่ง BadRequest response
   }
@@ -21,12 +21,12 @@ export const authMiddleware = async (context: Context) => {
 export const permissionMiddleware = async (context: Context, permissionId: number) => {
   const headersObject = await CheckPermission(context.headers, permissionId);
 
-  if (headersObject.code === 400) {
+  if (headersObject.status === 400) {
     logger.error('Invalid token');
     return false;
   }
 
-  if (headersObject.code === 401) {
+  if (headersObject.status === 401) {
     logger.error('Permission denied');
     return false;
   }

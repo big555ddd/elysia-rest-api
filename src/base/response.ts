@@ -16,27 +16,27 @@ export interface BaseResponse<T> {
 // Function for creating response JSON
 export const defaultJSON = <T>(status: number, message: string, data?: T, paginate?: ResponsePaginate) => {
     const response: BaseResponse<T> = {
-        status, // Store the status as a number directly
+        status,
         message,
-        data: status === 200 ? { success: true, paginate } : undefined, // Only show success and paginate if the status is 200
+        data: status === 200 ? { success: true, paginate } : undefined, 
         paginate,
+  
     };
 
-    // If data is provided, stringify it
-    if (data) {
+    if (data && status === 200 ) {
         response.message = message;
-        response.data = JSON.parse(stringifyWithBigInt(data)); // Handle BigInt
+        response.data = JSON.parse(stringifyWithBigInt(data)); 
     }
 
-    // If data is provided, stringify it
-    if (status !== 200) {
+
+
+    if ( !data &&status !== 200) {
         response.message = message;
-        response.data = JSON.parse(stringifyWithBigInt(data)); // Handle BigInt
+        response.data = data; 
     }
 
-    // Return a Response object with the proper HTTP status status
     return new Response(JSON.stringify(response), {
-        status: status, // Use the `status` parameter as the HTTP status status
+        status: status,
         headers: { 'Content-Type': 'application/json' },
     });
 
@@ -50,8 +50,11 @@ export const Success = <T>(data: T, paginate?: ResponsePaginate) => {
 // Paginate 200 success (supports pagination)
 export const Paginate = <T>(data: T, form: number, size: number, total: number) => {
     if (total === 0) {
+        console.log("1")
         return defaultJSON(200, 'Success', [], undefined);
     } else {
+        console.log("2")
+
         return defaultJSON(200, 'Success', data, {
             form: form,
             size: size,
